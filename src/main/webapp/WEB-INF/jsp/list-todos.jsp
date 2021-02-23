@@ -10,8 +10,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Your To-Do</h1>
-		<table class="table">
+		<table class="table table-striped">
 			<caption>-:Your To-Do: -</caption>
 			<thead>
 				<tr>
@@ -31,9 +30,9 @@
 			</tbody>
 		</table>
 
-		<h2>
-			<a href="\add-todo">Add To-Do</a>
-		</h2>
+		<div>
+			<a class="button" href="\add-todo">Add To-Do</a>
+		</div>
 	</div>
 
 	<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
