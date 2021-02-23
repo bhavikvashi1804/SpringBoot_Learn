@@ -11,12 +11,12 @@
 <body>
 	<div class="container">
 		<table class="table table-striped">
-			<caption>-:Your To-Do: -</caption>
 			<thead>
 				<tr>
 					<th>Description</th>
 					<th>Target Date</th>
 					<th>Is it done?</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -25,13 +25,15 @@
 						<td>${oneTodo.desc}</td>
 						<td>${oneTodo.targetDate}</td>
 						<td>${oneTodo.done}</td>
+						<td><a type="button" class="btn btn-warning"
+							href="/delete-todo?id=${oneTodo.id}">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 
 		<div>
-			<a class="button" href="\add-todo">Add To-Do</a>
+			<a type="button" class="btn btn-primary" href="/add-todo">Add To-Do</a>
 		</div>
 	</div>
 
