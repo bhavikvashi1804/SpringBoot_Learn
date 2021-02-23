@@ -57,7 +57,7 @@ public class TodoController {
 			return "todo";
 		}
 		String userName = (String) map.get("name");
-		service.addTodo(userName, todo.getDesc(), new Date(), false);
+		service.addTodo(userName, todo.getDesc(), todo.getTargetDate(), false);
 		return "redirect:/list-todos";
 	}
 	
