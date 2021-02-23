@@ -2,14 +2,18 @@ package com.bhavik.springboot.controller;
 
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.bhavik.springboot.model.Todo;
 import com.bhavik.springboot.service.TodoService;
 
 
@@ -32,15 +36,18 @@ public class TodoController {
 	
 	@RequestMapping(value="/add-todo",method=RequestMethod.GET)
 	public String addNewTodoPage(ModelMap map) {
-		
+		map.addAttribute("todo", new Todo(0, (String) map.get("name"), "", new Date(), false));
 		return "todo";
 	}
 	
 	
 	@RequestMapping(value="/add-todo",method=RequestMethod.POST)
-	public String addNewTodoToCollection(ModelMap map, @RequestParam String desc) {
+	public String addNewTodoToCollection(ModelMap map,@Valid Todo todo,BindingResult result) {
+		if(result.hasErrors()) {
+			return "todo";
+		}
 		String userName = (String) map.get("name");
-		service.addTodo(userName, desc, new Date(), false);
+		service.addTodo(userName, todo.getDesc(), new Date(), false);
 		return "redirect:/list-todos";
 	}
 	
