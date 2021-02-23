@@ -41,6 +41,6 @@ public class TodoController {
 	public String addNewTodoToCollection(ModelMap map, @RequestParam String desc) {
 		String userName = (String) map.get("name");
 		service.addTodo(userName, desc, new Date(), false);
-		return "list-todos";
+		return "redirect:/list-todos";
 	}
 }
