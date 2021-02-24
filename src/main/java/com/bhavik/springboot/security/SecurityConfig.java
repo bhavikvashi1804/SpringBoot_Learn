@@ -14,9 +14,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance()).withUser("bhavik")
 				.password("vashi").roles("USER", "ADMIN");
+
+		auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance()).withUser("raj")
+				.password("vashi").roles("USER", "ADMIN");
 	}
 
-	//show the login page
+	// show the login page
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/login", "/h2-console/**").permitAll().antMatchers("/", "/*todo*/**")
