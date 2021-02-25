@@ -2,6 +2,7 @@ package com.bhavik.springboot.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -42,7 +43,9 @@ public class TodoController {
 	public String showToDoListPage(ModelMap map) {
 		
 		String userName = getUserName(map);
-		map.put("todos", service.retrieveTodos(userName));
+		List<Todo> cUserTodo = repo.findByUser(userName);
+		System.out.println(cUserTodo);
+		map.put("todos", cUserTodo);
 		return "list-todos";
 	}
 
@@ -75,14 +78,16 @@ public class TodoController {
 	
 	@RequestMapping(value="/delete-todo",method=RequestMethod.GET)
 	public String deleteTodoFromCollection(ModelMap map, @RequestParam int id) {
-		service.deleteTodo(id);
+		//service.deleteTodo(id);
+		repo.deleteById(id);
 		return "redirect:/list-todos";
 	}
 	
 	
 	@RequestMapping(value="/update-todo",method=RequestMethod.GET)
 	public String updateTodoShowPage(ModelMap map, @RequestParam int id) {
-		Todo todo = service.getTodo(id);
+		//Todo todo = service.getTodo(id);
+		Todo todo = repo.findById(id).get();
 		map.put("todo", todo);
 		return "todo";
 	}
@@ -94,7 +99,8 @@ public class TodoController {
 			return "todo";
 		}
 		todo.setUser(getUserName(map));
-		service.updateTodo(todo);
+		//service.updateTodo(todo);
+		repo.save(todo);
 		return "redirect:/list-todos";
 	}
 }
