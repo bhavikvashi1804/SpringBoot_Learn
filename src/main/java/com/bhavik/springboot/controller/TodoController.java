@@ -36,7 +36,7 @@ public class TodoController {
 	}
 
 	@RequestMapping(value="/list-todos",method=RequestMethod.GET)
-	public String showLoginPage(ModelMap map) {
+	public String showToDoListPage(ModelMap map) {
 		
 		String userName = getUserName(map);
 		map.put("todos", service.retrieveTodos(userName));
