@@ -20,15 +20,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bhavik.springboot.model.Todo;
 import com.bhavik.springboot.service.TodoRepo;
-import com.bhavik.springboot.service.TodoService;
 
 
 @Controller
 @SessionAttributes("name")
 public class TodoController {
 
-	@Autowired
-	TodoService service;
 	@Autowired
 	TodoRepo repo;
 	
