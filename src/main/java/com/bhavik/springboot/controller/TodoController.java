@@ -66,7 +66,12 @@ public class TodoController {
 		//set the username of todo
 		todo.setUser(getUserName(map));
 		//save that todo
+		try {
 		repo.save(todo);
+		}
+		catch(Exception ex) {
+			System.out.println(ex);
+		}
 		//String userName = getUserName(map);
 		//service.addTodo(userName, todo.getDesc(), todo.getTargetDate(), false);
 		return "redirect:/list-todos";
