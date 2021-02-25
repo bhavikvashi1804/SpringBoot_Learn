@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bhavik.springboot.model.Todo;
+import com.bhavik.springboot.service.TodoRepo;
 import com.bhavik.springboot.service.TodoService;
 
 
@@ -27,6 +28,8 @@ public class TodoController {
 
 	@Autowired
 	TodoService service;
+	@Autowired
+	TodoRepo repo;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -60,8 +63,12 @@ public class TodoController {
 		if(result.hasErrors()) {
 			return "todo";
 		}
-		String userName = getUserName(map);
-		service.addTodo(userName, todo.getDesc(), todo.getTargetDate(), false);
+		//set the username of todo
+		todo.setUser(getUserName(map));
+		//save that todo
+		repo.save(todo);
+		//String userName = getUserName(map);
+		//service.addTodo(userName, todo.getDesc(), todo.getTargetDate(), false);
 		return "redirect:/list-todos";
 	}
 	
