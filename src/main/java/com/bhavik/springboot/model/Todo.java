@@ -2,9 +2,13 @@ package com.bhavik.springboot.model;
 
 import java.util.Date;
 
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Todo {
+	@Id
+	@GeneratedValue
     private int id;
     private String user;
     @Size(min=10, message = "Enter Atleast 10 char long descripton")
